@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bootstrap 轮播图</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/lib/reset.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+	<script src="../../js/lib/bootstrap.js"></script>
+	<style>
+		.pos_relative{
+			position:relative;
+		}
+		.pos_absolute{
+			position:absolute;
+		}
+
+		#carousal{
+			height:280px;
+			width:520px;
+		}
+		/* 轮播盒子 */
+		.carousal-inner {
+			width:100%;
+			height:100%;
+			overflow: hidden;
+		}
+		.carousal-inner li.item {
+			display:none;
+		}
+		.carousal-inner li.item.active {
+			display:block;
+		}
+		.carousal-inner li.item.stayNext {
+			position:absolute;
+			right:-100%;
+			top:0;
+			display:block;
+		}
+		.carousal-inner li.item.toLeft,
+		.carousal-inner li.item.active.toLeft
+		 {
+			transform: translate3d(-100%,0,0);
+			-webkit-transition: transform .6s ease-in-out;
+			-moz-transition: transform .6s ease-in-out;
+			transition: transform .6s ease-in-out;
+		}
+		.carousal-inner li.item.active.stayPrev {
+			position:absolute;
+			right:100%;
+			top:0;
+			display:block;
+		}
+		.carousal-inner li.item.toRight,
+		.carousal-inner li.item.active.toRight {
+			transform: translate3d(100%,0,0);
+			-webkit-transition: transform .6s ease-in-out;
+			-moz-transition: transform .6s ease-in-out;
+			transition: transform .6s ease-in-out;
+		}
+		/* 轮播点 */
+		.dotDispaly{
+			width:100%;
+			height:20px;
+			bottom:20px;
+			/* left:50%; */
+			/* margin-left:-50px; */
+			text-align:center;
+		}
+		.litter_dot{
+			display:inline-block;
+			width:10px;
+			height:10px;
+			margin-top:5px;
+			background:#FFF;
+			border-radius:5px;
+			-moz-border-radius:5px;
+		}
+		.litter_dot.active {
+			background:#f69317;
+		}
+		/* 轮播按钮 */
+		.slideBtn {
+			font-size:30px;
+			font-weight:bold;
+			width:50px;
+			height:50px;
+			line-height:50px;
+			top:50%;
+			margin-top:-25px;
+			text-align: center;
+		}
+		.slideBtn a {
+			color:#8dea12;
+			text-decoration: none;
+		}
+		.go_prev {
+			left:20px;
+		}
+		.go_next {
+			right:20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container pos_relative">
+		<div id="carousal" class="col-md-offset-3 pos_relative">
+			<ul class="pos_relative carousal-inner">
+				<li class="item active" data-imgIndex="0">
+					<img src="https://img.alicdn.com/simba/img/TB1TbUZex6I8KJjy0FgSutXzVXa.jpg" alt="">
+				</li>
+				<li class="item" data-imgIndex="1">
+					<img src="https://img.alicdn.com/tfs/TB1vd_2eS_I8KJjy0FoXXaFnVXa-520-280.jpg_q90_.webp" alt="">
+				</li>
+				<li class="item" data-imgIndex="2">
+					<img src="https://img.alicdn.com/tfs/TB1G_j6eRfH8KJjy1XbXXbLdXXa-520-280.png_q90_.webp" alt="">
+				</li>
+			</ul>
+			<ol class="pos_absolute dotDispaly">
+				<li class="litter_dot active" data-dotIndex="0"></li>
+				<li class="litter_dot" data-dotIndex="1"></li>
+				<li class="litter_dot" data-dotIndex="2"></li>
+			</ol>
+			<div class="pos_absolute go_prev slideBtn"><a href="#">&lsaquo;</a></div>
+			<div class="pos_absolute go_next slideBtn"><a href="#">&rsaquo;</a></div>
+		</div>
+	</div>
+	<script>
+		(function (win,$){
+			function clickEvent(event,callback1) {
+				var indexArr;
+				var $item = $('.carousal-inner .item');
+				var $active = $('.carousal-inner .item.active');
+				var Lilen = $('.carousal-inner .item').length;
+				var index = $active.data('imgindex');
+				var isNext = event.currentTarget.className.indexOf('go_next') != -1 ? true : false;
+				var index_1 = index == 0 ? Lilen-1 : index - 1;
+				var indexa1 = index == Lilen-1 ? 0 : index + 1;
+				// var $next = isNext ? $item.eq(indexa1) : $item.eq(index_1);
+				indexArr = [].concat(index_1).concat(index).concat(indexa1);
+				callback1(indexArr,isNext,removeAtive);
+				
+			}
+
+			function addOrientation(numArr,flag,callback2) {
+				if (flag) {
+					$('.carousal-inner .item').eq(numArr[2]).addClass('stayNext');
+					$('.carousal-inner .item').eq(numArr[2]).addClass('active');
+					$('.carousal-inner .item').eq(numArr[1]).addClass('toLeft');
+					$('.carousal-inner .item').eq(numArr[2]).addClass('toLeft');
+					$('.carousal-inner .item').eq(numArr[1]).one('webkitTransitionEnd',function() {
+							callback2(numArr,flag)
+						}
+					);
+					$('.carousal-inner .item').eq(numArr[1]).one('transitionend',function (){
+							callback2(numArr,flag)	
+						}
+					);
+				} else {
+					$('.carousal-inner .item').eq(numArr[0]).addClass('stayPrev');
+					$('.carousal-inner .item').eq(numArr[0]).addClass('active');
+					$('.carousal-inner .item').eq(numArr[1]).addClass('toRight');
+					$('.carousal-inner .item').eq(numArr[0]).addClass('toRight');
+					$('.carousal-inner .item').eq(numArr[1]).one('webkitTransitionEnd',function() {
+							callback2(numArr,flag)
+						}
+					);
+					$('.carousal-inner .item').eq(numArr[1]).one('transitionend',function(){
+							callback2(numArr,flag)	
+						}
+					);
+				}
+			}
+
+			function removeAtive (numArr,flag) {
+				if (flag) {
+					$('.carousal-inner .item').eq(numArr[1]).removeClass('toLeft active');
+					$('.carousal-inner .item').eq(numArr[2]).removeClass('toLeft stayNext');
+				} else {
+					$('.carousal-inner .item').eq(numArr[1]).removeClass('toRight active');
+					$('.carousal-inner .item').eq(numArr[0]).removeClass('toRight stayPrev');
+				}
+			}
+
+			$('.slideBtn').on('click',function(e) {
+				clickEvent(e,addOrientation);
+			})
+
+			// $('.slideBtn').on('click', function(e) {
+			// 	var $item = $('.carousal-inner .item');
+			// 	var Lilen = $('.carousal-inner .item').length;
+			// 	var index = $('.carousal-inner .item.active').data('imgindex');
+			// 	var isNext = e.currentTarget.className.indexOf('go_next');
+			// 	var index_1 = index == 0 ? Lilen-1 : index - 1;
+			// 	var indexa1 = index == Lilen-1 ? 0 : index + 1;
+			// 	if (isNext != -1) {
+			// 		// $item.eq(index_1).removeClass('');
+			// 		$item.eq(indexa1).addClass('stayNext active');
+			// 		setTimeout(function() {
+			// 			$item.eq(index).addClass('toLeft');
+			// 			$item.eq(indexa1).addClass('toLeft');
+			// 		},0)
+			// 		setTimeout(function() {
+			// 			$item.eq(index).removeClass('toLeft active');
+			// 		},1000)
+			// 	} else {
+			// 		$item.eq(index_1).addClass('stayPrev active');
+			// 		setTimeout(function() {
+			// 			$item.eq(index).addClass('toRight');
+			// 			$item.eq(index_1).addClass('toRight');
+			// 		},0)
+			// 		setTimeout(function() {
+			// 			$item.eq(index).removeClass('toRight active');
+			// 		},1000)
+			// 	}
+				
+			// 	// var index = 0;
+			// 	// var $item = $('.carousal-inner .item');
+			// 	// var $activeItem = $('.carousal-inner .item.active');
+			// 	// index = $activeItem.index($item);
+			// 	// $item.eq(index + 1).addClass('stayNext');
+			// 	// setTimeout(function() {
+			// 	// 	$activeItem.addClass('toLeft');
+			// 	// 	$item.eq(index + 1).addClass('toLeft');
+			// 	// 	// $activeItem.removeClass('active toLeft');
+			// 	// 	// $item.eq(index + 1).removeClass('toLeft').addClass('active');
+			// 	// },0)
+				
+			// })
+		})(window,jQuery)
+	</script>
+</body>
+</html>
