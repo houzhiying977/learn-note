@@ -1,8 +1,3 @@
-r--
-title: eslint 常用配置
-tags: eslint
-notebook: eslint
----
 
 <!-- TOC -->
 

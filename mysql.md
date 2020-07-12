@@ -1,9 +1,3 @@
----
----
-title: mysql数据库
-tags: mysql
-notebook: mysql
----
 
 ## 操作数据库
 - 创建数据库

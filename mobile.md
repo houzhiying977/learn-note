@@ -1,8 +1,3 @@
----
-title: 移动端开发常用配置
-tags: mobile
-notebook: 移动端开发
----
 
 ## 常用 meta
 ```

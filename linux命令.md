@@ -1,8 +1,4 @@
----
-title: linux常用命令
-tags: linux命令
-notebook: linux
----
+
 <!-- TOC -->
 
 - [linux 命令](#linux-命令)
