@@ -8,14 +8,14 @@
 
 <!-- /TOC -->
 ## 前端
-+ [移动端开发常用配置](./mobile.md)
-+ [同源策略](./cross-origin.md)
-+ [eslint 常用配置](./eslint.md)
-+ [webpack 常用配置](./webpack.md)
++ [移动端开发常用配置](./mobile.md, "移动端开发常用配置")
++ [同源策略](./Cross-Origin.md, "同源策略")
++ [eslint 常用配置](./eslint.md, "eslint 常用配置")
++ [webpack 常用配置](./webpack.md, "webpack 常用配置")
 
 ## 后端
-+ [mysql 数据库](./mysql.md)
++ [mysql 数据库](./mysql.md, "mysql 数据库")
 
 ## mac/linux/unix
-+ [服务器部署](./server.md)
-+ [linux 常用命令](linux命令.md) 
++ [服务器部署](./server.md, "服务器部署")
++ [linux 常用命令](linux命令.md, "linux 常用命令") 

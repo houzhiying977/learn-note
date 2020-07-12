@@ -1,13 +1,12 @@
 
-<!-- TOC -->
+<!-- TOC GFM -->
 
-- [1. 首先安装一下](#1-首先安装一下)
-- [创建 eslint 配置文件 .eslintrc.*](#创建-eslint-配置文件-eslintrc)
-- [在 rules 中加上 eslint-loader](#在-rules-中加上-eslint-loader)
+* [首先安装一下](#首先安装一下)
+* [创建 eslint 配置文件 .eslintrc.*](#创建-eslint-配置文件-eslintrc)
+* [在 rules 中加上 eslint-loader](#在-rules-中加上-eslint-loader)
 
 <!-- /TOC -->
-
-## 1. 首先安装一下
+## 首先安装一下
 ```
 npm i eslint eslint-loader babel-eslint -D
 ```
