@@ -97,6 +97,7 @@ tail -300f /usr/local/tomcat7/logs/catalina.out
 2. SecureFXPortable ------ 上传下载文件（root权限）
 3. ftprush ------ 上传下载文件（分的ftptest 账号）
 
+
 #### j2EE项目
 
 #### maven项目
