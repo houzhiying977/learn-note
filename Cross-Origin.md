@@ -21,7 +21,7 @@
 - 域名: store.company.com
 - 端口: 81
 
-## JSONP（JSON with Padding ） 跨域
+## JSONP（JSON with$4 Padding ） 跨域
 
 ### 原理
 1. 由于 script img iframe 标签src属性不受同源策略影响，它们可以加载其他源中的资源
